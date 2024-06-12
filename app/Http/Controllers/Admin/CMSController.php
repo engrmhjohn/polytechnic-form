@@ -429,4 +429,32 @@ class CMSController extends Controller
         return redirect()->back()->with('message', 'Information Successfully Added!');
     }
 
+    public function manageInfo()
+    {
+        return view('backend.student_info.index', [
+            'info' => StudentInfo::orderBy('id', 'DESC')->get()
+        ]);
+    }
+    // public function editInfo($id)
+    // {
+    //     $info = StudentInfo::find($id);
+
+    //     return view('backend.student_info.edit',[
+    //         'info' => $info
+    //     ]);
+    // }
+    // public function updateInfo(Request $request)
+    // {
+    //     $info               = StudentInfo::find($request->info_id);
+    //     $info->name = $request->name;
+    //     $info->polytechnic_name = $request->polytechnic_name;
+    //     $info->blood_group = $request->blood_group;
+    //     $info->email = $request->email;
+    //     $info->number = $request->number;
+    //     $info->document = image_upload($request->document);
+    //     $info->save();
+    //     return redirect(route('manage_student_info'))->with('message', 'Successfully Updated!');
+    // }
+
+
 }

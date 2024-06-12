@@ -1,46 +1,43 @@
 @extends('backend.master')
 @section('title')
-    CMS :: Work Record
+    CMS :: Student Record
 @endsection
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Manage Work Record</h3>
+                    <h3 class="card-title">Manage Student Record</h3>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('admin.add_work') }}" class="btn btn-success btn-sm mb-3" title="Add New">
-                        <i class="fe fe-plus"></i> Add New
-                    </a>
                     <div class="table-responsive">
                         <table id="file-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Visit Date</th>
-                                    <th>Client Name</th>
-                                    <th>Client Address</th>
-                                    <th>Feedback</th>
-                                    @if (Auth::user()->role == '2')
-                                    <th>Employee Name</th>
-                                    @endif
-                                    <th class="text-center">Action</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Polytechnic Name</th>
+                                    <th>Whatsapp No</th>
+                                    <th>Blood Group</th>
+                                    <th>Email</th>
+                                    {{-- <th class="text-center">Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($work as $item)
+                                @foreach ($info as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($item->en_visit_date)->format('d F Y') }}</td>
-                                        <td>{{ $item->en_client_name }}</td>
-                                        <td>{{ $item->en_client_address }}</td>
-                                        <td>{{ $item->feedback->en_title ?? ''}}</td>
-                                        @if (Auth::user()->role == '2')
-                                        <td>{{ $item->employee->name ?? ''}}</td>
-                                        @endif
+                                        <td>{{ $item->name ?? ''}}</td>
+                                        <td>
+                                            <img src="{{ asset($item->document) }}" style="max-width: 150px;" alt="Student Picture">
+                                        </td>
+                                        <td>{{ $item->polytechnic_name ?? '' }}</td>
+                                        <td>{{ $item->number ?? ''}}</td>
+                                        <td>{{ $item->blood_group ?? ''}}</td>
+                                        <td>{{ $item->email ?? ''}}</td>
 
-                                        <td name="bstable-actions">
+                                        {{-- <td name="bstable-actions">
                                             <div class="btn-list d-flex justify-content-center" style="gap: 10px;">
                                                 <a href="{{ route('admin.view_work', $item->id) }}"><button
                                                     class="btn btn-success btn-sm" data-bs-toggle="tooltip"
@@ -60,7 +57,7 @@
                                                             class="fe fe-trash-2"> </span></button>
                                                 </form>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

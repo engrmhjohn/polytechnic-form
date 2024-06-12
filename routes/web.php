@@ -103,6 +103,9 @@ Route::controller(ContactUsController::class)->group(function () {
 Route::controller(CMSController::class)->group(function () {
     Route::post('student-info', 'saveInfo')->name('student_info');
     Route::get('/manage-student-info', 'manageInfo')->name('manage_student_info');
+    Route::get('/edit-student-info/{id}', 'editInfo')->name('edit_student_info');
+    Route::post('/update-student-info', 'updateInfo')->name('update_student_info');
+    Route::post('/delete-student-info', 'deleteInfo')->name('delete_student_info');
 });
 
 Route::get('/clear', function () {
